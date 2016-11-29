@@ -17,15 +17,15 @@ int main()
 
     PageTable PT(logSize, physSize);            // CREATE THE PAGE TABLE
 
-    cout << "Enter the page-reference string: " << endl;
+    cout << "Enter the page-reference string "<<"(0-"<< logSize - 1 << ")" << ": " << endl;
 	int pageNum = validInput();
-	while (pageNum >= logSize) {		// Validate input		
+	while (pageNum >= logSize) {		// Validate input by staying within the indices of the Page Table.		
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Out of range.  Try again: ";
 		pageNum = validInput();
 	}
-    while (pageNum != -1) {                    // REPEAT UNTIL END OF INPUT
+    while (pageNum != -1) {                     // REPEAT UNTIL END OF INPUT
         if (PT.isValid(pageNum)) {              // IF PAGE IS IN MEMORY,
             PT.accessPage(pageNum);             //   THEN ACCESS IT
         }
@@ -33,7 +33,7 @@ int main()
             PT.storePage(pageNum);              //   SWAP THE PAGE IN 
             PT.accessPage(pageNum);             //   THEN ACCESS IT
         }
-		cout << "Enter page-reference string: ";// READ NEXT INPUT VALUE
+		cout << "Enter the page-reference string " << "(0-" << logSize - 1 << ")" << ": " << endl;
 		pageNum = validInput();
 		while (pageNum >= logSize) {		// Validate input		
 			cin.clear();

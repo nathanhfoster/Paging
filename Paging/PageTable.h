@@ -24,7 +24,7 @@ private:
 	};
 	vector<TableEntry> pageMap; // Used to dynamically write to the physical memory
 	vector<int> freeFrames;     // Used as a counter for available addresses in the physical memory
-                                // freeFrames is a vector because we can use the freeFrames.empty() call to check availability
+                                // freeFrames is a vector because you can use the freeFrames.empty() function call to check availability
 	int selectSwapPage();       // 
 };
 

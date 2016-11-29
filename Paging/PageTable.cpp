@@ -5,15 +5,16 @@ using namespace std;
 
 PageTable::PageTable(int log, int phys)
 // constructor
+// Utilize a pageMap vector to simulate dynamic memory allocation and access.
 // Assumes: log is the number of pages in the page table
 //          phys is the number of frames in physical memory
 // Results: creates and initializes the entries in the page table
 {
 	numStored = 0;
-	pageMap.resize(log);
+	pageMap.resize(log); // Maximum size of the vector
 
 	for (int i = phys - 1; i >= 0; i--) {
-		freeFrames.push_back(i); // Utilize a vector to simulate dynamic memory allocation and access.
+		freeFrames.push_back(i); // Allocate room for the physical memory
 	}
 }
 
