@@ -63,7 +63,7 @@ int PageTable::selectSwapPage(){
 
 	int oldPage, oldTime = numStored;
 	for (int i = 0; i < pageMap.size(); i++) { // Iterate through the pageMap vector
-		if (pageMap[i].valid && pageMap[i].timeStamp < oldTime) { // If the bit is set and 
+		if (pageMap[i].valid && pageMap[i].timeStamp < oldTime) { // If the bit is set and time stamp is the smallest
 			oldTime = pageMap[i].timeStamp;
 			oldPage = i;
 		}
