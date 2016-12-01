@@ -11,13 +11,14 @@ public:
 	bool isValid(int pageNum);
 	void accessPage(int pageNum);
 	void storePage(int pageNum);
+	void printTables();
 private:
 	int numStored;
 
 	class TableEntry
 	{
 	public:
-		int frameNumber;        // 
+		int frameNumber;        // Used to represent content of an address
 		int timeStamp;          // Used to flag the least active frames
 		bool valid;
 		TableEntry() { valid = false; }// Intially set all frames to be invalid
@@ -26,6 +27,7 @@ private:
 	vector<int> freeFrames;     // Used as a counter for available addresses in the physical memory
                                 // freeFrames is a vector because you can use the freeFrames.empty() function call to check availability
 	int selectSwapPage();       // 
+
 };
 
 #endif

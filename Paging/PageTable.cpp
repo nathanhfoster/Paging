@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "PageTable.h"
+#include <iomanip>
 using namespace std;
 
 PageTable::PageTable(int log, int phys){
@@ -11,7 +12,14 @@ PageTable::PageTable(int log, int phys){
 // Results: creates and initializes the entries in the page table
 	numStored = 0;
 	pageMap.resize(log); // Maximum size of the vector
-
+	for (int i = 0; i < log; i++)
+	{
+		pageMap.at(i).frameNumber = 0;
+		pageMap.at(i).valid = false;
+		pageMap.at(i).timeStamp = 0;
+	}
+	//iter_swap(pageMap.begin(), pageMap.begin() + 1);
+	
 	for (int i = phys - 1; i >= 0; i--) {
 		freeFrames.push_back(i); // Allocate room for the physical memory
 	}
@@ -28,7 +36,7 @@ void PageTable::accessPage(int pageNum){
 // Assumes: 0 <= pageNum < page table size
 // Returns: the frame number where pageNum is stored
 
-	cout << pageNum << ": page found at frame " << pageMap[pageNum].frameNumber << endl;
+	cout << pageNum << ": page found at frame " << pageMap.at(pageNum).frameNumber << endl;
 }
 
 void PageTable::storePage(int pageNum){
@@ -50,14 +58,15 @@ void PageTable::storePage(int pageNum){
 			<< frameNum << endl << "   ";
 	}
 
-	pageMap[pageNum].frameNumber = frameNum;
+	pageMap.at(pageNum).frameNumber = frameNum;
 	pageMap[pageNum].timeStamp = numStored; // Increment time stamp
 	pageMap[pageNum].valid = true;
 
 	numStored++; // Increment time stamp counter
+	printTables();
 }
 
-int PageTable::selectSwapPage(){
+int PageTable::selectSwapPage() {
 // Assumes: at least one page is stored in the table
 // Returns: index of the oldest page in the table
 
@@ -69,4 +78,25 @@ int PageTable::selectSwapPage(){
 		}
 	}
 	return oldPage;
+}
+
+
+void PageTable::printTables() {
+	cout << "Page" << "   Valid" << "   TimeStamp" << "               Free Frames" << endl 
+		<< "   |--------------------------------|" << "         |--------------------------------|" << endl;
+	for (unsigned int i = 0; i < pageMap.size(); i++)
+	{
+		cout << left << i << right << setw(6) << pageMap.at(i).frameNumber << setw(6)
+			<< pageMap.at(i).valid << setw(6)
+			<< pageMap.at(i).timeStamp 
+			<< "                 ";
+		if (i < freeFrames.size()) {
+			cout << right << setw(9) << i << setw(16) << freeFrames.at(i) << endl << "   |--------------------------------|" 
+				<< "         |--------------------------------|" << endl;
+		}
+		else {
+			cout << endl << "   |--------------------------------|" << endl;
+		}
+	}
+
 }

@@ -9,15 +9,15 @@ int validInput();
 
 int main()
 {
-    cout << "Enter number of pages in logical memory: " << endl;
+    cout << "Enter number of pages in logical memory: ";
 	int logSize = validInput();
 
-    cout << "Enter number of frames in physical memory: " << endl;
+    cout << "Enter number of frames in physical memory: ";
 	int physSize = validInput();
 
     PageTable PT(logSize, physSize);            // CREATE THE PAGE TABLE
 
-    cout << "Enter the page-reference string "<<"(0-"<< logSize - 1 << ")" << ": " << endl;
+    cout << "Enter the page-reference string "<<"(0-"<< logSize - 1 << ")" << ": ";
 	int pageNum = validInput();
 	while (pageNum >= logSize) {		// Validate input by staying within the indices of the Page Table.		
 		cin.clear();
@@ -33,7 +33,7 @@ int main()
             PT.storePage(pageNum);              //   SWAP THE PAGE IN 
             PT.accessPage(pageNum);             //   THEN ACCESS IT
         }
-		cout << "Enter the page-reference string " << "(0-" << logSize - 1 << ")" << ": " << endl;
+		cout << "Enter the page-reference string " << "(0-" << logSize - 1 << ")" << ": ";
 		pageNum = validInput();
 		while (pageNum >= logSize) {		// Validate input		
 			cin.clear();
@@ -49,10 +49,12 @@ int main()
 
 int validInput(){
 	int input;
-	while (!(cin >> input)) {
+	//cin >> input;
+	while (!(cin >> input)) { // cin.fail() while input is not an int
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		cout << "Invalid input.  Try again: ";
+		//cin >> input;
 	}
 	if (input < 0) { // If a negative number terminate program.
 		cout << "Terminating in..." << endl;
