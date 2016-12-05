@@ -21,7 +21,7 @@ private:
 		int frameNumber;        // Used to represent content of an address
 		int timeStamp;          // Used to flag the least active frames
 		bool valid;
-		TableEntry(): frameNumber(0), timeStamp(0), valid(false) { }// Intially set all frames to be invalid
+		TableEntry(): frameNumber(-1), timeStamp(0), valid(false) { }// Intially set all frames to be invalid
 	};
 	vector<TableEntry> pageMap; // Used to dynamically write to the physical memory
 	vector<int> freeFrames;     // Used as a counter for available addresses in the physical memory

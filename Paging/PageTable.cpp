@@ -84,7 +84,7 @@ void PageTable::printTables() {
 	//printing top border
 	cout << left << setfill('-') << setw(1) << "+" << setw(4) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << setfill('-') << "-" << right << "+" << setfill(' ')<< setw(21) << "+" << setfill('-') << setw(15) << "-" << endl;
 	//printing table record
-	cout << right << setw(1) << "|" << "ADR" << setfill(' ') << setw(2) << "|" << left << setw(15) << "Page" << setw(1) << "|" << setw(15)  << "Valid" << setw(1) << "|" << setw(5) << "TimeStamp" << setw(1) << "|" << setw(20) << setfill(' ') << " " << "|" << "Free Frames" << endl;
+	cout << right << setw(1) << "|" << "ADR" << setfill(' ') << setw(2) << "|" << left << setw(15) << "Page" << setw(1) << "|" << setw(15)  << "Valid" << setw(1) << "|" << setw(5) << "TimeStamp" << setw(1) << "|" << setw(20) << setfill(' ') << " " << "|" << "Free Frames" << setw(4) << right << "|" << endl;
 	//printing bottom border
 	cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 	for (unsigned int i = 0; i < pageMap.size(); i++)
@@ -96,7 +96,7 @@ void PageTable::printTables() {
 		
 
 		if (i < freeFrames.size()) {
-			cout << setw(20) << setfill(' ') << " " << "|" << freeFrames.at(i) << endl;
+			cout << setw(20) << setfill(' ') << " " << "|" << freeFrames.at(i) << setw(14) << right << "|" <<endl;
 			//printing bottom border
 			cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 		}
