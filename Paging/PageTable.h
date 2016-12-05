@@ -6,14 +6,15 @@ using namespace std;
 
 class PageTable
 {
+private:
+	int numStored;
 public:
 	PageTable(int log, int phys);
 	bool isValid(int pageNum);
 	void accessPage(int pageNum);
 	void storePage(int pageNum);
 	void printTables();
-private:
-	int numStored;
+	PageTable() : numStored(0){}
 
 	class TableEntry
 	{

@@ -10,7 +10,6 @@ PageTable::PageTable(int log, int phys){
 // Assumes: log is the number of pages in the page table
 //          phys is the number of frames in physical memory
 // Results: creates and initializes the entries in the page table
-	numStored = 0;
 	pageMap.resize(log); // Maximum size of the vector
 	//iter_swap(pageMap.begin(), pageMap.begin() + 1);
 	
@@ -38,14 +37,14 @@ void PageTable::storePage(int pageNum){
 // Results: stores pageNum in a free frame, updating the table
 
 	int frameNum;
-	if (freeFrames.empty()) {
-		int swapPage = selectSwapPage();
+	if (freeFrames.empty()) { // If there is no room in the physical memory
+		int swapPage = selectSwapPage(); // Swap page
 		pageMap[swapPage].valid = false;
 		frameNum = pageMap[swapPage].frameNumber;
 		cout << pageNum << ": PAGE FAULT -- swapping page " << pageNum << " into frame "
 			<< frameNum << endl;
 	}
-	else {
+	else { // Else remove one free frame from the physical memory
 		frameNum = freeFrames.back(); // frameNum = freeFrames last element
 		freeFrames.pop_back(); // Delete last element
 		cout << pageNum << ": PAGE FAULT -- inserting page " << pageNum << " into frame "

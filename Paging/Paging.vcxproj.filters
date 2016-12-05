@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vm.cpp">
+    <ClCompile Include="PageTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PageTable.cpp">
+    <ClCompile Include="VirtualMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -111,7 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="PageTable.cpp" />
-    <ClCompile Include="vm.cpp" />
+    <ClCompile Include="VirtualMemory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PageTable.h" />
