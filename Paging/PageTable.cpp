@@ -95,7 +95,7 @@ void PageTable::printTables() {
 		
 
 		if (i < freeFrames.size()) {
-			cout << setw(20) << setfill(' ') << " " << "|" << freeFrames.at(i) << setw(14) << right << "|" <<endl;
+			cout << left << setw(20) << setfill(' ') << " " << "|" << setw(5) << freeFrames.at(i) << setfill(' ') << setw(9) << " " << setw(1) << "|" <<endl;
 			//printing bottom border
 			cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 		}
