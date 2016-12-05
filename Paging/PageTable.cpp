@@ -75,32 +75,32 @@ int PageTable::selectSwapPage() {
 
 
 void PageTable::printTables() {
-	/*setfill(x) fill the empty space by provided character x*/
-	/*setw(x) creates a column of width x*/
-	/*left keyword align the contents of a columns left align*/
-	/*right keyword align the contents of a columns right align*/
+	/* setfill(x) fill the empty space by provided character x   */
+	/* setw(x) creates a column of width x                       */
+	/* left keyword align the contents of a columns left align   */
+	/* right keyword align the contents of a columns right align */
 
-	//printing top border
+	// printing top border
 	cout << left << setfill('-') << setw(1) << "+" << setw(4) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << setfill('-') << "-" << right << "+" << setfill(' ')<< setw(21) << "+" << setfill('-') << setw(15) << "-" << endl;
-	//printing table record
+	// printing table record
 	cout << right << setw(1) << "|" << "ADR" << setfill(' ') << setw(2) << "|" << left << setw(15) << "Page" << setw(1) << "|" << setw(15)  << "Valid" << setw(1) << "|" << setw(5) << "TimeStamp" << setw(1) << "|" << setw(20) << setfill(' ') << " " << "|" << "Free Frames" << setw(4) << right << "|" << endl;
-	//printing bottom border
+	// printing bottom border
 	cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 	for (unsigned int i = 0; i < pageMap.size(); i++)
 	{
-		//printing table record
+		// printing table record
 		cout << "|" << setfill(' ') << setw(3) << i << setfill(' ') << setw(1) << " " << "|" << setw(15) << pageMap.at(i).frameNumber
 			<< setw(1) << "|" << setw(15) << pageMap.at(i).valid << setw(1) << "|" << setw(5)
 			<< pageMap.at(i).timeStamp << setfill(' ') << setw(4) << " " << setw(1) << "|";
-		
-
+		// conditionally print the free frames
 		if (i < freeFrames.size()) {
 			cout << left << setw(20) << setfill(' ') << " " << "|" << setw(5) << freeFrames.at(i) << setfill(' ') << setw(9) << " " << setw(1) << "|" <<endl;
 			//printing bottom border
 			cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 		}
+		// if there wasn't a frame printed don't forget to print the bottom border
 		else {
-			//printing bottom border
+			// printing bottom border
 			cout << endl << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << endl;
 		}
 	}

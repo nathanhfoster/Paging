@@ -6,6 +6,7 @@
 using namespace std;
 
 int validInput();
+void exit();
 
 int main()
 {
@@ -56,17 +57,23 @@ int validInput(){
 		cout << "Invalid input.  Try again: ";
 		//cin >> input;
 	}
+
 	if (input < 0) { // If a negative number terminate program.
-		cout << "Terminating in..." << endl;
-		for (int e = 3; e > 0; e--)
-		{
-			std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			std::cout << e << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			std::cout << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			std::cout << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
-			std::cout << std::endl;
-		}
-		exit(EXIT_FAILURE);
+		exit();
 	}
+
 	return input;
+}
+
+void exit() {
+	cout << "Terminating in..." << endl;
+	for (int e = 3; e > 0; e--)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		std::cout << e << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		std::cout << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		std::cout << "."; std::this_thread::sleep_for(std::chrono::milliseconds(250));
+		std::cout << std::endl;
+	}
+	exit(EXIT_FAILURE);
 }
