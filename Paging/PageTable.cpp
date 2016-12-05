@@ -12,12 +12,6 @@ PageTable::PageTable(int log, int phys){
 // Results: creates and initializes the entries in the page table
 	numStored = 0;
 	pageMap.resize(log); // Maximum size of the vector
-	for (int i = 0; i < log; i++)
-	{
-		pageMap.at(i).frameNumber = 0;
-		pageMap.at(i).valid = false;
-		pageMap.at(i).timeStamp = 0;
-	}
 	//iter_swap(pageMap.begin(), pageMap.begin() + 1);
 	
 	for (int i = phys - 1; i >= 0; i--) {
@@ -49,13 +43,13 @@ void PageTable::storePage(int pageNum){
 		pageMap[swapPage].valid = false;
 		frameNum = pageMap[swapPage].frameNumber;
 		cout << pageNum << ": PAGE FAULT -- swapping page " << pageNum << " into frame "
-			<< frameNum << endl << "   ";
+			<< frameNum << endl;
 	}
 	else {
 		frameNum = freeFrames.back(); // frameNum = freeFrames last element
 		freeFrames.pop_back(); // Delete last element
 		cout << pageNum << ": PAGE FAULT -- inserting page " << pageNum << " into frame "
-			<< frameNum << endl << "   ";
+			<< frameNum << endl;
 	}
 
 	pageMap.at(pageNum).frameNumber = frameNum;
@@ -82,21 +76,44 @@ int PageTable::selectSwapPage() {
 
 
 void PageTable::printTables() {
-	cout << "Page" << "   Valid" << "   TimeStamp" << "               Free Frames" << endl 
-		<< "   |--------------------------------|" << "         |--------------------------------|" << endl;
+	/*setfill(x) fill the empty space by provided character x*/
+	/*setw(x) creates a column of width x*/
+	/*left keyword align the contents of a columns left align*/
+	/*right keyword align the contents of a columns right align*/
+
+	//printing top border
+	cout << left << setfill('-') << setw(1) << "+" << setw(4) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << setfill('-') << "-" << right << "+" << setfill(' ')<< setw(21) << "+" << setfill('-') << setw(15) << "-" << endl;
+	//printing table record
+	cout << right << setw(1) << "|" << "ADR" << setfill(' ') << setw(2) << "|" << left << setw(15) << "Page" << setw(1) << "|" << setw(15)  << "Valid" << setw(1) << "|" << setw(5) << "TimeStamp" << setw(1) << "|" << setw(20) << setfill(' ') << " " << "|" << "Free Frames" << endl;
+	//printing bottom border
+	cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 	for (unsigned int i = 0; i < pageMap.size(); i++)
 	{
-		cout << left << i << right << setw(6) << pageMap.at(i).frameNumber << setw(6)
-			<< pageMap.at(i).valid << setw(6)
-			<< pageMap.at(i).timeStamp 
-			<< "                 ";
+		//printing table record
+		cout << "|" << setfill(' ') << setw(3) << i << setfill(' ') << setw(1) << " " << "|" << setw(15) << pageMap.at(i).frameNumber
+			<< setw(1) << "|" << setw(15) << pageMap.at(i).valid << setw(1) << "|" << setw(5)
+			<< pageMap.at(i).timeStamp << setfill(' ') << setw(4) << " " << setw(1) << "|";
+		
+
 		if (i < freeFrames.size()) {
-			cout << right << setw(9) << i << setw(16) << freeFrames.at(i) << endl << "   |--------------------------------|" 
-				<< "         |--------------------------------|" << endl;
+			cout << setw(20) << setfill(' ') << " " << "|" << freeFrames.at(i) << endl;
+			//printing bottom border
+			cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 		}
 		else {
-			cout << endl << "   |--------------------------------|" << endl;
+			//printing bottom border
+			cout << endl << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << endl;
 		}
 	}
 
 }
+
+/*
+printf("-5s%-%-20i%-20i%-20i%-20i%\n", "     ", i, pageMap.at(i).frameNumber, pageMap.at(i).valid, pageMap.at(i).timeStamp);
+if (i < freeFrames.size()) {
+	printf("%-20i%-20i%-20s%\n-20s%\n", i, freeFrames.at(i), "|--------------------------------|", "|--------------------------------|");
+}
+else {
+	printf("%-20s%\n", "   |--------------------------------|");
+}
+*/
