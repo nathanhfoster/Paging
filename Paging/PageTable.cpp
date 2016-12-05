@@ -85,7 +85,7 @@ void PageTable::printTables() {
 	// printing table record
 	cout << right << setw(1) << "|" << "ADR" << setfill(' ') << setw(2) << "|" << left << setw(15) << "Page" << setw(1) << "|" << setw(15)  << "Valid" << setw(1) << "|" << setw(5) << "TimeStamp" << setw(1) << "|" << setw(20) << setfill(' ') << " " << "|" << "Free Frames" << setw(4) << right << "|" << endl;
 	// printing bottom border
-	cout << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
+	cout << left << setfill('-') << setw(4) << "+" << setw(17) << "-" << setw(1) << "+" << setw(15) << "-" << setw(1) << "+" << setw(9) << "-" << setw(1) << "+" << setw(20) << setfill(' ') << " " << setw(1) << setfill(' ') << "+" << setfill('-') << setw(15) << "-" << endl;
 	for (unsigned int i = 0; i < pageMap.size(); i++)
 	{
 		// printing table record
